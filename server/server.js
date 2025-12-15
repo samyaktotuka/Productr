@@ -44,12 +44,11 @@ mongoose
 app.use("/api/products", router);
 
 /* ================= SERVE REACT ================= */
-/* React build folder must be here: server/dist */
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "../dist")));
 
 /* React Router fallback */
 app.use((req, res) => {
-  res.status(404).json({ message: "Route not found" });
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 
