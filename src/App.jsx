@@ -16,7 +16,8 @@ function App() {
     <Routes>
       {/* AUTH ROUTES */}
       <Route element={<Main />}>
-        <Route path="/" element={<Signup />} />
+        {/* <Route path="/" element={<Signup />} /> */}
+        <Route index element={<Signup />} />
         <Route path="/otp" element={<Otp />} />
       </Route>
 
@@ -26,6 +27,8 @@ function App() {
         <Route path="home" element={<HomePage />} />
         <Route path="products" element={<ProductsPage />} />
       </Route>
+
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
