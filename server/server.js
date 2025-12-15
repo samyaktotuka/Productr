@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+
 import router from "./routes/productRoute.js";
 import { seedProductsIfEmpty } from "./data.js";
 
@@ -10,6 +13,10 @@ dotenv.config();
 console.log("SERVER FILE LOADED");
 
 const app = express();
+
+/* 🔧 Fix __dirname (ES modules) */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /* middleware */
 app.use(cors());
@@ -28,13 +35,23 @@ mongoose
   .then(async () => {
     console.log("✅ MongoDB Atlas connected");
 
-    // 🔑 SEED DEFAULT PRODUCTS (ONLY IF DB IS EMPTY)
+    // 🌱 Seed default products ONLY if empty
     await seedProductsIfEmpty();
   })
   .catch((err) => console.error("❌ Mongo error:", err));
 
-/* routes */
+/* API routes */
 app.use("/api/products", router);
+
+/* ================= SERVE REACT ================= */
+/* React build folder must be here: server/dist */
+app.use(express.static(path.join(__dirname, "dist")));
+
+/* React Router fallback */
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
 
 /* server */
 const PORT = process.env.PORT || 5000;
