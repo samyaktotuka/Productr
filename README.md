@@ -12,6 +12,7 @@ npm install
 3) Create a .env file inside the server folder:
 ATLASDB_URL=mongodb+srv://samyaktotuka_db_user:ugAyTcSAlaK9Xq5b@orufy.dpka90s.mongodb.net/?appName=Orufy
 PORT=5000
+VITE_API_BASE_URL=http://localhost:5000
 
 4) Run
 npm run dev
