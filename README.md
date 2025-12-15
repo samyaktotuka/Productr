@@ -14,7 +14,7 @@ ATLASDB_URL=mongodb+srv://samyaktotuka_db_user:ugAyTcSAlaK9Xq5b@orufy.dpka90s.mo
 PORT=5000
 VITE_API_BASE_URL=http://localhost:5000
 
-4) Run
+4) Run - 
 npm run dev
 
 5) Open in Browser
